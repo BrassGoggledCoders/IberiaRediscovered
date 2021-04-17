@@ -6,9 +6,14 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = "mixin"
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
     }
     dependencies {
         classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "4.+", changing: true
+        classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
     }
 }
 
@@ -17,6 +22,7 @@ plugins {
 }
 
 apply plugin: "net.minecraftforge.gradle"
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: "maven"
 apply plugin: "java"
 apply plugin: "idea"
@@ -61,6 +67,8 @@ minecraft {
 
             properties 'mixin.env.disableRefMap': 'true'
 
+            arg "-mixin.config=iberia_rediscovered.mixins.json"
+
             mods {
                 iberia_rediscovered {
                     source(sourceSets.main)
@@ -72,6 +80,8 @@ minecraft {
             workingDirectory project.file("run/server")
 
             properties 'mixin.env.disableRefMap': 'true'
+
+            arg "-mixin.config=iberia_rediscovered.mixins.json"
 
             mods {
                 iberia_rediscovered {
@@ -87,6 +97,8 @@ minecraft {
 
             properties 'fml.earlyprogresswindow': 'false'
             properties 'mixin.env.disableRefMap': 'true'
+
+            arg "-mixin.config=iberia_rediscovered.mixins.json"
 
             args '--all', '--output', file('src/generated/resources/'),
                     '--reports',
@@ -133,6 +145,8 @@ dependencies {
     def registrate = "com.tterrag.registrate:Registrate:MC1.16.2-${registrate_version}"
     implementation fg.deobf(registrate)
     shade registrate
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 }
 
 task srcJar(type: Jar) {
@@ -155,7 +169,8 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : "${version}",
                 "Implementation-Vendor"   : "${team}",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "iberia_rediscovered.mixins.json"
         ])
     }
 }
@@ -178,6 +193,10 @@ uploadArchives {
             repository(url: "file://" + (System.getenv("local_maven") != null ? System.getenv("local_maven") : System.getenv("bamboo_local_maven")))
         }
     }
+}
+
+mixin {
+    add sourceSets.main, "iberia_rediscovered.refmap.json"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
