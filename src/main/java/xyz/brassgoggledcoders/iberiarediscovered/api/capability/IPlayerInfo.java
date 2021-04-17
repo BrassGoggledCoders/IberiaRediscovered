@@ -1,5 +1,7 @@
 package xyz.brassgoggledcoders.iberiarediscovered.api.capability;
 
+import java.util.List;
+
 public interface IPlayerInfo {
     void setAgeProgress(int ageProgress);
 
@@ -14,4 +16,8 @@ public interface IPlayerInfo {
     void tickAgeProgress(double modifier);
 
     void resetAge();
+
+    List<String> getOptIn();
+
+    List<String> getOptOut();
 }

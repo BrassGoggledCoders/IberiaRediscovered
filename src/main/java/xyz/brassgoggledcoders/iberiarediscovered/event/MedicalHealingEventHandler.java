@@ -1,18 +1,27 @@
 package xyz.brassgoggledcoders.iberiarediscovered.event;
 
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredAttributes;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredEffects;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import xyz.brassgoggledcoders.iberiarediscovered.module.ModuleStatus;
+import xyz.brassgoggledcoders.iberiarediscovered.module.Modules;
+
+import java.util.function.Supplier;
 
 public class MedicalHealingEventHandler {
+    private final Supplier<ModuleStatus> getStatus;
+
+    public MedicalHealingEventHandler(Supplier<ModuleStatus> getStatus) {
+        this.getStatus = getStatus;
+    }
 
     @SubscribeEvent
     public void onDamageReceived(LivingDamageEvent event) {
@@ -44,9 +53,13 @@ public class MedicalHealingEventHandler {
     public void onPlayerTick(PlayerTickEvent playerTickEvent) {
         if (playerTickEvent.phase == TickEvent.Phase.START && playerTickEvent.side == LogicalSide.SERVER) {
             playerTickEvent.player.getCapability(RediscoveredCapabilities.PLAYER_INFO)
-                    .ifPresent(playerInfo -> playerInfo.tickAgeProgress(
-                            playerTickEvent.player.getAttributeValue(RediscoveredAttributes.AGE_PROGRESSION_SPEED_MODIFIER.get())
-                    ));
+                    .ifPresent(playerInfo -> {
+                        if (Modules.MEDICAL_HEALING.getStatus().isEnabled(playerInfo)) {
+                            playerInfo.tickAgeProgress(
+                                    playerTickEvent.player.getAttributeValue(RediscoveredAttributes.AGE_PROGRESSION_SPEED_MODIFIER.get())
+                            );
+                        }
+                    });
         }
     }
 }

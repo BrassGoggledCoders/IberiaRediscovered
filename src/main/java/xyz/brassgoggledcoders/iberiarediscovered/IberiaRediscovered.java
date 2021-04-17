@@ -1,27 +1,30 @@
 package xyz.brassgoggledcoders.iberiarediscovered;
 
+import com.google.common.collect.Lists;
 import com.tterrag.registrate.Registrate;
-import net.minecraft.nbt.INBT;
-import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfo;
+import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfoStorage;
+import xyz.brassgoggledcoders.iberiarediscovered.config.ServerConfig;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredAttributes;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCommands;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredEffects;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredItems;
 import xyz.brassgoggledcoders.iberiarediscovered.module.MedicalHealingModule;
+import xyz.brassgoggledcoders.iberiarediscovered.module.Module;
 
-import javax.annotation.Nullable;
+import java.util.List;
 
 @Mod(IberiaRediscovered.ID)
 public class IberiaRediscovered {
@@ -29,10 +32,8 @@ public class IberiaRediscovered {
 
     private static final NonNullLazy<Registrate> REGISTRATE = NonNullLazy.of(() -> Registrate.create(ID));
 
-    public final MedicalHealingModule medicalHealingModule;
-
     public IberiaRediscovered() {
-        this.medicalHealingModule = new MedicalHealingModule();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.CONFIG_PAIR.getRight());
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
@@ -45,18 +46,7 @@ public class IberiaRediscovered {
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
-        CapabilityManager.INSTANCE.register(IPlayerInfo.class, new Capability.IStorage<IPlayerInfo>() {
-            @Nullable
-            @Override
-            public INBT writeNBT(Capability<IPlayerInfo> capability, IPlayerInfo instance, Direction side) {
-                return null;
-            }
-
-            @Override
-            public void readNBT(Capability<IPlayerInfo> capability, IPlayerInfo instance, Direction side, INBT nbt) {
-
-            }
-        }, PlayerInfo::new);
+        CapabilityManager.INSTANCE.register(IPlayerInfo.class, new PlayerInfoStorage(), PlayerInfo::new);
     }
 
     public void commandSetup(FMLServerAboutToStartEvent event) {
