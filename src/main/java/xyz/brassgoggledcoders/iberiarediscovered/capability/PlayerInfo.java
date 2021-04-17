@@ -1,26 +1,22 @@
 package xyz.brassgoggledcoders.iberiarediscovered.capability;
 
-import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
+import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 
 public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
-    private int ageProgress;
+    private double ageProgress;
     private int age;
     private int maxHealthRegenPercent;
 
     @Override
     public void setAgeProgress(int ageProgress) {
-        if (ageProgress > 0 && ageProgress < 20 * 60 * 5) {
-            this.ageProgress = ageProgress;
-        } else {
-            this.ageProgress = 0;
-        }
+        this.ageProgress = Math.max(ageProgress, 0);
     }
 
     @Override
     public int getAgeProgress() {
-        return this.ageProgress;
+        return (int) Math.ceil(this.ageProgress);
     }
 
     @Override
@@ -39,13 +35,13 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     }
 
     @Override
-    public int getMaxHealthRegenPercent() {
+    public int getMaxHealthRegenPercent(double modifier) {
         return this.maxHealthRegenPercent;
     }
 
     @Override
-    public void tickAgeProgress() {
-        this.ageProgress++;
+    public void tickAgeProgress(double modifier) {
+        this.ageProgress += modifier;
         this.checkAgeProgress();
     }
 
@@ -60,14 +56,14 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("age", this.age);
-        nbt.putInt("ageProgress", this.ageProgress);
+        nbt.putDouble("ageProgress", this.ageProgress);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
         this.age = nbt.getInt("age");
-        this.ageProgress = nbt.getInt("ageProgress");
+        this.ageProgress = nbt.getDouble("ageProgress");
         this.recalculateMaxHealthRegenPercent();
     }
 

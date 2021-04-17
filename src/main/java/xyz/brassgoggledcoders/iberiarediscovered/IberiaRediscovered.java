@@ -1,11 +1,5 @@
 package xyz.brassgoggledcoders.iberiarediscovered;
 
-import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
-import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfo;
-import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCommands;
-import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredEffects;
-import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredItems;
-import xyz.brassgoggledcoders.iberiarediscovered.module.MedicalHealingModule;
 import com.tterrag.registrate.Registrate;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -19,6 +13,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
+import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfo;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredAttributes;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCommands;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredEffects;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredItems;
+import xyz.brassgoggledcoders.iberiarediscovered.module.MedicalHealingModule;
 
 import javax.annotation.Nullable;
 
@@ -38,6 +39,7 @@ public class IberiaRediscovered {
 
         MinecraftForge.EVENT_BUS.addListener(this::commandSetup);
 
+        RediscoveredAttributes.setup(modBus);
         RediscoveredItems.setup();
         RediscoveredEffects.setup();
     }

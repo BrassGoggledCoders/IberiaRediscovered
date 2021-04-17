@@ -1,8 +1,10 @@
 package xyz.brassgoggledcoders.iberiarediscovered.effect;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredAttributes;
 
 import javax.annotation.Nonnull;
 
@@ -13,7 +15,12 @@ public class TreatedEffect extends Effect {
 
     @Override
     public void performEffect(@Nonnull LivingEntity entityLiving, int amplifier) {
-        entityLiving.heal(amplifier + 1);
+        ModifiableAttributeInstance attribute = entityLiving.getAttribute(RediscoveredAttributes.TREATMENT_MODIFIER.get());
+        if (attribute != null) {
+            entityLiving.heal(((float) (amplifier + 1)) * (float) attribute.getValue());
+        } else {
+            entityLiving.heal(amplifier + 1);
+        }
     }
 
     @Override

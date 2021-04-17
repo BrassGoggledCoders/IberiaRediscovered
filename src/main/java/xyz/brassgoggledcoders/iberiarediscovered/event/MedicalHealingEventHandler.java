@@ -1,5 +1,10 @@
 package xyz.brassgoggledcoders.iberiarediscovered.event;
 
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.LogicalSide;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredAttributes;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,6 +37,16 @@ public class MedicalHealingEventHandler {
             case EASY:
                 playerEntity.heal(9);
                 break;
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerTick(PlayerTickEvent playerTickEvent) {
+        if (playerTickEvent.phase == TickEvent.Phase.START && playerTickEvent.side == LogicalSide.SERVER) {
+            playerTickEvent.player.getCapability(RediscoveredCapabilities.PLAYER_INFO)
+                    .ifPresent(playerInfo -> playerInfo.tickAgeProgress(
+                            playerTickEvent.player.getAttributeValue(RediscoveredAttributes.AGE_PROGRESSION_SPEED_MODIFIER.get())
+                    ));
         }
     }
 }

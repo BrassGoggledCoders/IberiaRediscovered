@@ -9,9 +9,9 @@ public interface IPlayerInfo {
 
     int getAge();
 
-    int getMaxHealthRegenPercent();
+    int getMaxHealthRegenPercent(double modifier);
 
-    void tickAgeProgress();
+    void tickAgeProgress(double modifier);
 
     void resetAge();
 }
