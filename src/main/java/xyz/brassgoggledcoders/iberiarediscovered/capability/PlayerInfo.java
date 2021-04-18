@@ -1,15 +1,19 @@
 package xyz.brassgoggledcoders.iberiarediscovered.capability;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.StringNBT;
+import net.minecraft.world.Difficulty;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
+import xyz.brassgoggledcoders.iberiarediscovered.module.Module;
 import xyz.brassgoggledcoders.iberiarediscovered.module.Modules;
 
 import java.util.List;
+import java.util.Map;
 
 public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     private List<String> optIn = Lists.newArrayList();
@@ -17,6 +21,7 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     private double ageProgress;
     private int age;
     private int maxHealthRegenPercent;
+    private Map<String, Difficulty> chosenDifficulty = Maps.newHashMap();
 
     @Override
     public void setAgeProgress(int ageProgress) {
@@ -62,13 +67,33 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     }
 
     @Override
-    public List<String> getOptIn() {
-        return null;
+    public Difficulty getDifficultyFor(String moduleName, Difficulty worldDifficulty) {
+        Difficulty difficulty = this.chosenDifficulty.get(moduleName);
+        if (difficulty != null) {
+            return difficulty;
+        } else {
+            Module module = Modules.get(moduleName);
+            if (module != null) {
+                return module.getDifficulty().getDifficulty(worldDifficulty);
+            } else {
+                return worldDifficulty;
+            }
+        }
     }
 
     @Override
-    public List<String> getOptOut() {
-        return null;
+    public void setChosenDifficultyFor(String module, Difficulty chosenDifficulty) {
+        this.chosenDifficulty.put(module, chosenDifficulty);
+    }
+
+    @Override
+    public boolean isOptIn(String module) {
+        return this.optIn.contains(module);
+    }
+
+    @Override
+    public boolean isOptOut(String module) {
+        return this.optOut.contains(module);
     }
 
     @Override

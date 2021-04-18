@@ -2,6 +2,7 @@ package xyz.brassgoggledcoders.iberiarediscovered.event;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.Difficulty;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.LogicalSide;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredAttributes;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredEffects;
+import xyz.brassgoggledcoders.iberiarediscovered.module.MedicalHealingModule;
 import xyz.brassgoggledcoders.iberiarediscovered.module.ModuleStatus;
 import xyz.brassgoggledcoders.iberiarediscovered.module.Modules;
 
@@ -36,17 +38,27 @@ public class MedicalHealingEventHandler {
     @SubscribeEvent
     public void onAwake(PlayerWakeUpEvent event) {
         PlayerEntity playerEntity = event.getPlayer();
-        switch (playerEntity.getEntityWorld().getDifficulty()) {
-            case HARD:
-                playerEntity.heal(3);
-                break;
-            case NORMAL:
-                playerEntity.heal(6);
-                break;
-            case EASY:
-                playerEntity.heal(9);
-                break;
+        if (this.getStatus.get().isEnabled(playerEntity)) {
+            final Difficulty worldDifficulty = event.getPlayer().getEntityWorld().getDifficulty();
+            int healing = playerEntity.getCapability(RediscoveredCapabilities.PLAYER_INFO)
+                    .map(playerInfo -> playerInfo.getDifficultyFor(MedicalHealingModule.NAME, worldDifficulty))
+                    .map(difficulty -> {
+                        switch (difficulty) {
+                            case HARD:
+                                return 3;
+                            case NORMAL:
+                                return 6;
+                            default:
+                                return 9;
+                        }
+                    })
+                    .orElse(0);
+
+            if (healing > 0) {
+                playerEntity.heal(healing);
+            }
         }
+
     }
 
     @SubscribeEvent

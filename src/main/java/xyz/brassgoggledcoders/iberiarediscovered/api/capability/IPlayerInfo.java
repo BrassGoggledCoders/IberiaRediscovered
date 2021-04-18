@@ -1,5 +1,7 @@
 package xyz.brassgoggledcoders.iberiarediscovered.api.capability;
 
+import net.minecraft.world.Difficulty;
+
 import java.util.List;
 
 public interface IPlayerInfo {
@@ -17,7 +19,11 @@ public interface IPlayerInfo {
 
     void resetAge();
 
-    List<String> getOptIn();
+    Difficulty getDifficultyFor(String module, Difficulty worldDifficulty);
 
-    List<String> getOptOut();
+    void setChosenDifficultyFor(String module, Difficulty chosenDifficulty);
+
+    boolean isOptIn(String module);
+
+    boolean isOptOut(String module);
 }

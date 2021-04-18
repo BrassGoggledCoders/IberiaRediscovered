@@ -5,13 +5,14 @@ import net.minecraftforge.common.MinecraftForge;
 import xyz.brassgoggledcoders.iberiarediscovered.event.MedicalHealingEventHandler;
 
 public class MedicalHealingModule extends Module {
+    public static final String NAME = "medical_healing";
     public final MedicalHealingEventHandler healingEventHandler;
 
     private ForgeConfigSpec.IntValue healthRegenPercentLost;
     private ForgeConfigSpec.IntValue timeBetweenAge;
 
     public MedicalHealingModule() {
-        super("medical_healing");
+        super(NAME);
         this.healingEventHandler = new MedicalHealingEventHandler(this::getStatus);
         MinecraftForge.EVENT_BUS.register(healingEventHandler);
     }
