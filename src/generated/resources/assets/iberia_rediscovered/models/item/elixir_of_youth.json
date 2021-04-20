@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "iberia_rediscovered:item/elixir_of_youth"
+  }
+}
