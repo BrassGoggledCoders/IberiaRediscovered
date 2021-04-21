@@ -1,6 +1,8 @@
 package xyz.brassgoggledcoders.iberiarediscovered;
 
 import com.tterrag.registrate.Registrate;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -20,11 +22,21 @@ import xyz.brassgoggledcoders.iberiarediscovered.config.ServerConfig;
 import xyz.brassgoggledcoders.iberiarediscovered.content.*;
 import xyz.brassgoggledcoders.iberiarediscovered.data.RediscoveredGLMProvider;
 
+import javax.annotation.Nonnull;
+
 @Mod(IberiaRediscovered.ID)
 public class IberiaRediscovered {
     public static final String ID = "iberia_rediscovered";
 
-    private static final NonNullLazy<Registrate> REGISTRATE = NonNullLazy.of(() -> Registrate.create(ID));
+    private static final NonNullLazy<Registrate> REGISTRATE = NonNullLazy.of(() -> Registrate.create(ID)
+            .itemGroup(() -> new ItemGroup(ID) {
+                @Override
+                @Nonnull
+                public ItemStack createIcon() {
+                    return RediscoveredItems.ELIXIR_OF_YOUTH.asStack();
+                }
+            }, "Iberia Rediscovered")
+    );
 
     public IberiaRediscovered() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.CONFIG_PAIR.getRight());
@@ -38,6 +50,7 @@ public class IberiaRediscovered {
         RediscoveredAttributes.setup(modBus);
         RediscoveredItems.setup();
         RediscoveredEffects.setup();
+        RediscoveredRecipes.setup();
         RediscoveredLoot.setup();
     }
 

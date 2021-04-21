@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "minecraft:sponge"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "type": "iberia_rediscovered:potion",
+      "potion": "minecraft:healing"
+    }
+  ],
+  "result": {
+    "item": "iberia_rediscovered:supernatural_medical_supplies",
+    "count": 8
+  }
+}
