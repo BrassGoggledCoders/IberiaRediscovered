@@ -1,0 +1,34 @@
+{
+  "conditions": [
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:entities/witch"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:entities/guardian"
+        }
+      ]
+    },
+    {
+      "condition": "iberia_rediscovered:age",
+      "minAge": 10,
+      "entity": "killer_player"
+    },
+    {
+      "condition": "minecraft:random_chance_with_looting",
+      "chance": 0.005,
+      "looting_multiplier": 0.1
+    }
+  ],
+  "entries": [
+    {
+      "type": "minecraft:item",
+      "name": "iberia_rediscovered:elixir_of_youth"
+    }
+  ],
+  "type": "iberia_rediscovered:loot_entry"
+}

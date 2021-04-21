@@ -1,0 +1,10 @@
+{
+  "command.iberia_rediscovered.not_player_choice": "\u01DDsoo\u0265\u0186 o\u0287 s\u0279\u01DD\u028E\u0250\u05DF\u0500 \u028Do\u05DF\u05DF\u0250 \u0287ou s\u01DDop \u01DD\u05DFnpoW s\u0131\u0265\u27D8",
+  "effect.iberia_rediscovered.treated": "p\u01DD\u0287\u0250\u01DD\u0279\u27D8",
+  "item.iberia_rediscovered.adequate_medical_supplies": "s\u01DD\u0131\u05DFddnS \u05DF\u0250\u0254\u0131p\u01DDW \u01DD\u0287\u0250nb\u01DDp\u2C6F",
+  "item.iberia_rediscovered.basic_medical_supplies": "s\u01DD\u0131\u05DFddnS \u05DF\u0250\u0254\u0131p\u01DDW \u0254\u0131s\u0250\u15FA",
+  "item.iberia_rediscovered.elixir_of_youth": "\u0265\u0287no\u028E \u025FO \u0279\u0131x\u0131\u05DF\u018E",
+  "item.iberia_rediscovered.primitive_medical_supplies": "s\u01DD\u0131\u05DFddnS \u05DF\u0250\u0254\u0131p\u01DDW \u01DD\u028C\u0131\u0287\u0131\u026F\u0131\u0279\u0500",
+  "item.iberia_rediscovered.supernatural_medical_supplies": "s\u01DD\u0131\u05DFddnS \u05DF\u0250\u0254\u0131p\u01DDW \u05DF\u0250\u0279n\u0287\u0250u\u0279\u01DDdnS",
+  "itemGroup.iberia_rediscovered": "p\u01DD\u0279\u01DD\u028Co\u0254s\u0131p\u01DD\u1D1A \u0250\u0131\u0279\u01DDqI"
+}

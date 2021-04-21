@@ -1,0 +1,33 @@
+{
+  "conditions": [
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:chests/shipwreck_treasure"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:chests/desert_pyramid"
+        }
+      ]
+    },
+    {
+      "condition": "iberia_rediscovered:age",
+      "minAge": 10,
+      "entity": "this"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.005
+    }
+  ],
+  "entries": [
+    {
+      "type": "minecraft:item",
+      "name": "iberia_rediscovered:elixir_of_youth"
+    }
+  ],
+  "type": "iberia_rediscovered:loot_entry"
+}

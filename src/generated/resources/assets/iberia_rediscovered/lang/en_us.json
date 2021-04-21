@@ -1,0 +1,10 @@
+{
+  "command.iberia_rediscovered.not_player_choice": "This Module does not allow Players to Choose",
+  "effect.iberia_rediscovered.treated": "Treated",
+  "item.iberia_rediscovered.adequate_medical_supplies": "Adequate Medical Supplies",
+  "item.iberia_rediscovered.basic_medical_supplies": "Basic Medical Supplies",
+  "item.iberia_rediscovered.elixir_of_youth": "Elixir Of Youth",
+  "item.iberia_rediscovered.primitive_medical_supplies": "Primitive Medical Supplies",
+  "item.iberia_rediscovered.supernatural_medical_supplies": "Supernatural Medical Supplies",
+  "itemGroup.iberia_rediscovered": "Iberia Rediscovered"
+}

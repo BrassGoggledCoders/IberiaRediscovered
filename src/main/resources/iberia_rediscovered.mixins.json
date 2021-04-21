@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "xyz.brassgoggledcoders.iberiarediscovered.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "iberia_rediscovered.refmap.json",
+  "mixins": [
+    "PlayerEntityMixin"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
