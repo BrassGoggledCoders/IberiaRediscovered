@@ -13,7 +13,7 @@ public class MedicalHealingModule extends Module {
 
     public MedicalHealingModule() {
         super(NAME);
-        this.healingEventHandler = new MedicalHealingEventHandler(this::getStatus);
+        this.healingEventHandler = new MedicalHealingEventHandler();
         MinecraftForge.EVENT_BUS.register(healingEventHandler);
     }
 

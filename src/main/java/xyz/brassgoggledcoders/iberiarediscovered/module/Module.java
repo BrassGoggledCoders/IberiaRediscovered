@@ -1,6 +1,9 @@
 package xyz.brassgoggledcoders.iberiarediscovered.module;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.ForgeConfigSpec;
+import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
+import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
 
 public class Module {
     private ForgeConfigSpec.EnumValue<ModuleStatus> status;
@@ -27,6 +30,16 @@ public class Module {
 
     public boolean isPlayerChoice() {
         return playerChoice.get();
+    }
+
+    public boolean isActiveFor(PlayerEntity playerEntity) {
+        return playerEntity.getCapability(RediscoveredCapabilities.PLAYER_INFO)
+                .map(this::isActiveFor)
+                .orElse(false);
+    }
+
+    public boolean isActiveFor(IPlayerInfo playerInfo) {
+        return this.getStatus().isEnabled(playerInfo.getChoiceFor(this.getName()));
     }
 
     public void configureServer(ForgeConfigSpec.Builder builder) {

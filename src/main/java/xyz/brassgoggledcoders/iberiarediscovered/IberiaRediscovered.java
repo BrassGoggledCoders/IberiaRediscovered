@@ -50,8 +50,9 @@ public class IberiaRediscovered {
         RediscoveredAttributes.setup(modBus);
         RediscoveredItems.setup();
         RediscoveredEffects.setup();
-        RediscoveredRecipes.setup();
         RediscoveredLoot.setup();
+        RediscoveredRecipes.setup();
+        RediscoveredTexts.setup();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

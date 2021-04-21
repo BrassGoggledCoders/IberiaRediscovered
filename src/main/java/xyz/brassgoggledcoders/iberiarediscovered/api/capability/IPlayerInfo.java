@@ -2,8 +2,6 @@ package xyz.brassgoggledcoders.iberiarediscovered.api.capability;
 
 import net.minecraft.world.Difficulty;
 
-import java.util.List;
-
 public interface IPlayerInfo {
     void setAgeProgress(int ageProgress);
 
@@ -23,7 +21,7 @@ public interface IPlayerInfo {
 
     void setChosenDifficultyFor(String module, Difficulty chosenDifficulty);
 
-    boolean isOptIn(String module);
+    PlayerChoice getChoiceFor(String module);
 
-    boolean isOptOut(String module);
+    void setChoiceFor(String module, PlayerChoice playerChoice);
 }

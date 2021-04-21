@@ -10,7 +10,8 @@ public class ServerConfig {
             .configure(ServerConfig::new);
 
     public ServerConfig(ForgeConfigSpec.Builder builder) {
-        for (Module module : Modules.MODULES) {
+        for (Modules moduleEnum : Modules.values()) {
+            Module module = moduleEnum.get();
             builder.push(module.getName());
             module.configureServer(builder);
             builder.pop();

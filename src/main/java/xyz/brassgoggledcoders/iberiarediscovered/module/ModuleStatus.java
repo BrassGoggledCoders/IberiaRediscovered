@@ -1,32 +1,22 @@
 package xyz.brassgoggledcoders.iberiarediscovered.module;
 
-import net.minecraft.entity.player.PlayerEntity;
-import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
-import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
+import xyz.brassgoggledcoders.iberiarediscovered.api.capability.PlayerChoice;
 
 import java.util.function.Predicate;
 
 public enum ModuleStatus {
-    ENABLED(true, playerInfo -> true),
-    OPT_OUT(true, playerInfo -> true),
-    OPT_IN(false, playerInfo -> false),
-    DISABLED(false, playerInfo -> false);
+    ENABLED(playerChoice -> true),
+    OPT_OUT(PlayerChoice::isOptOut),
+    OPT_IN(PlayerChoice::isOptIn),
+    DISABLED(playerInfo -> false);
 
-    private final Predicate<IPlayerInfo> isEnabled;
-    private final boolean defaultValue;
+    private final Predicate<PlayerChoice> isEnabled;
 
-    ModuleStatus(boolean defaultValue, Predicate<IPlayerInfo> isEnabled) {
-        this.defaultValue = defaultValue;
+    ModuleStatus(Predicate<PlayerChoice> isEnabled) {
         this.isEnabled = isEnabled;
     }
 
-    public boolean isEnabled(IPlayerInfo playerInfo) {
-        return this.isEnabled.test(playerInfo);
-    }
-
-    public boolean isEnabled(PlayerEntity playerEntity) {
-        return playerEntity.getCapability(RediscoveredCapabilities.PLAYER_INFO)
-                .map(this::isEnabled)
-                .orElse(defaultValue);
+    public boolean isEnabled(PlayerChoice playerChoice) {
+        return this.isEnabled.test(playerChoice);
     }
 }
