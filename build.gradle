@@ -4,7 +4,7 @@ buildscript {
         jcenter()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "http://maven.minecraftforge.net"
         }
         maven {
             name = "mixin"
@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "4.+", changing: true
+        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "4.1.+", changing: true
         classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
     }
 }
@@ -119,7 +119,7 @@ configurations {
 
 shadowJar {
     configurations = [project.configurations.shade]
-    relocate 'com.tterrag.registrate', 'xyz.brassgoggledcoders.transport.repack.registrate'
+    relocate 'com.tterrag.registrate', 'xyz.brassgoggledcoders.iberiarediscovered.repack.registrate'
     classifier ''
 }
 
@@ -128,14 +128,18 @@ repositories {
     mavenCentral()
     maven {
         name = "forge"
-        url = "http://files.minecraftforge.net/maven"
+        url = "https://maven.minecraftforge.net"
     }
     maven {
         name = "Registrate"
-        url = "http://maven.tterrag.com/"
+        url = "https://maven.tterrag.com/"
         content {
             includeGroup "com.tterrag.registrate"
         }
+    }
+    maven {
+        name = "mixin"
+        url = 'https://repo.spongepowered.org/repository/maven-public/'
     }
 }
 
@@ -196,6 +200,7 @@ uploadArchives {
 }
 
 mixin {
+    defaultObfuscationEnv "searge"
     add sourceSets.main, "iberia_rediscovered.refmap.json"
 }
 

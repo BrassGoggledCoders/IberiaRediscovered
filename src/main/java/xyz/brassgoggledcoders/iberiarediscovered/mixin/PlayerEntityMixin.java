@@ -14,7 +14,8 @@ public class PlayerEntityMixin {
     @Inject(
             method = "shouldHeal",
             at = @At("HEAD"),
-            cancellable = true
+            cancellable = true,
+            remap = false
     )
     private void overrideShouldHeal(CallbackInfoReturnable<Boolean> callbackInfo) {
         PlayerEntity playerEntity = ((PlayerEntity) (Object) this);

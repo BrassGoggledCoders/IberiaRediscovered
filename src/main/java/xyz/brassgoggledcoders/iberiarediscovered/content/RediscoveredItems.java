@@ -10,6 +10,7 @@ import net.minecraftforge.common.Tags;
 import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
 import xyz.brassgoggledcoders.iberiarediscovered.item.ElixirOfYouthItem;
 import xyz.brassgoggledcoders.iberiarediscovered.item.MedicalSuppliesItem;
+import xyz.brassgoggledcoders.iberiarediscovered.item.TeamTokenItem;
 import xyz.brassgoggledcoders.iberiarediscovered.recipe.ingredient.PotionIngredient;
 
 @SuppressWarnings("unused")
@@ -68,6 +69,11 @@ public class RediscoveredItems {
     public static final ItemEntry<ElixirOfYouthItem> ELIXIR_OF_YOUTH = IberiaRediscovered.getRegistrate()
             .object("elixir_of_youth")
             .item(ElixirOfYouthItem::new)
+            .register();
+
+    public static final ItemEntry<TeamTokenItem> TEAM_TOKEN = IberiaRediscovered.getRegistrate()
+            .object("team_token")
+            .item(TeamTokenItem::new)
             .register();
 
     public static void setup() {

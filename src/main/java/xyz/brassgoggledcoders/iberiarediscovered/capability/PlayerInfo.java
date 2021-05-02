@@ -6,6 +6,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraftforge.common.util.INBTSerializable;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.PlayerChoice;
+import xyz.brassgoggledcoders.iberiarediscovered.api.capability.WorldPos;
 import xyz.brassgoggledcoders.iberiarediscovered.module.Module;
 import xyz.brassgoggledcoders.iberiarediscovered.module.Modules;
 
@@ -90,6 +91,26 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     @Override
     public void setChoiceFor(String module, PlayerChoice playerChoice) {
         this.playerChoice.put(module, playerChoice);
+    }
+
+    @Override
+    public void setOriginRebirth(WorldPos worldPos) {
+
+    }
+
+    @Override
+    public WorldPos getOriginRebirth() {
+        return null;
+    }
+
+    @Override
+    public void setLastRebirth(WorldPos worldPos) {
+
+    }
+
+    @Override
+    public WorldPos getLastRebirth() {
+        return null;
     }
 
     @Override

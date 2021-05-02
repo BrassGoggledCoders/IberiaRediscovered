@@ -1,5 +1,7 @@
 package xyz.brassgoggledcoders.iberiarediscovered.api.capability;
 
+import jdk.nashorn.internal.ir.Block;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 
 public interface IPlayerInfo {
@@ -24,4 +26,12 @@ public interface IPlayerInfo {
     PlayerChoice getChoiceFor(String module);
 
     void setChoiceFor(String module, PlayerChoice playerChoice);
+
+    void setOriginRebirth(WorldPos worldPos);
+
+    WorldPos getOriginRebirth();
+
+    void setLastRebirth(WorldPos worldPos);
+
+    WorldPos getLastRebirth();
 }

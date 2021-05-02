@@ -4,7 +4,11 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public enum Modules {
-    MEDICAL_HEALING(Modules::getHealing);
+    MEDICAL_HEALING(Modules::getHealing),
+    RANDOMIZED_SPAWN(Modules::getRebirth);
+
+    public static final RandomizedRebirthModule RANDOMIZED_SPAWN_MODULE = new RandomizedRebirthModule();
+    public static final MedicalHealingModule MEDICAL_HEALING_MODULE = new MedicalHealingModule();
 
     private final Supplier<Module> getModule;
 
@@ -30,5 +34,7 @@ public enum Modules {
         return MEDICAL_HEALING_MODULE;
     }
 
-    public static final MedicalHealingModule MEDICAL_HEALING_MODULE = new MedicalHealingModule();
+    public static Module getRebirth() {
+        return RANDOMIZED_SPAWN_MODULE;
+    }
 }

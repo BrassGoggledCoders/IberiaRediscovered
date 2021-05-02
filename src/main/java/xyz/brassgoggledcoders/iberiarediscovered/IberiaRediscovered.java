@@ -1,6 +1,7 @@
 package xyz.brassgoggledcoders.iberiarediscovered;
 
 import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +30,7 @@ public class IberiaRediscovered {
     public static final String ID = "iberia_rediscovered";
 
     private static final NonNullLazy<Registrate> REGISTRATE = NonNullLazy.of(() -> Registrate.create(ID)
+            .addDataGenerator(ProviderType.BLOCK_TAGS, RediscoveredBlockTags::generateTags)
             .itemGroup(() -> new ItemGroup(ID) {
                 @Override
                 @Nonnull
