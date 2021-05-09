@@ -16,6 +16,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfo;
 import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfoStorage;
@@ -28,6 +31,8 @@ import javax.annotation.Nonnull;
 @Mod(IberiaRediscovered.ID)
 public class IberiaRediscovered {
     public static final String ID = "iberia_rediscovered";
+
+    public static final Logger LOGGER = LogManager.getLogger(ID);
 
     private static final NonNullLazy<Registrate> REGISTRATE = NonNullLazy.of(() -> Registrate.create(ID)
             .addDataGenerator(ProviderType.BLOCK_TAGS, RediscoveredBlockTags::generateTags)

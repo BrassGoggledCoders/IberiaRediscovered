@@ -1,10 +1,11 @@
 package xyz.brassgoggledcoders.iberiarediscovered.api.capability;
 
-import jdk.nashorn.internal.ir.Block;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.math.GlobalPos;
 import net.minecraft.world.Difficulty;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public interface IPlayerInfo {
+public interface IPlayerInfo extends INBTSerializable<CompoundNBT> {
     void setAgeProgress(int ageProgress);
 
     int getAgeProgress();
@@ -27,11 +28,11 @@ public interface IPlayerInfo {
 
     void setChoiceFor(String module, PlayerChoice playerChoice);
 
-    void setOriginRebirth(WorldPos worldPos);
+    void setLastDeath(GlobalPos worldPos);
 
-    WorldPos getOriginRebirth();
+    GlobalPos getLastDeath();
 
-    void setLastRebirth(WorldPos worldPos);
+    void setLastRebirth(GlobalPos worldPos);
 
-    WorldPos getLastRebirth();
+    GlobalPos getLastRebirth();
 }

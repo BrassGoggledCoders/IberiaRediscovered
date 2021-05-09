@@ -1,12 +1,15 @@
 package xyz.brassgoggledcoders.iberiarediscovered.capability;
 
 import com.google.common.collect.Maps;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTDynamicOps;
+import net.minecraft.util.math.GlobalPos;
 import net.minecraft.world.Difficulty;
 import net.minecraftforge.common.util.INBTSerializable;
+import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.PlayerChoice;
-import xyz.brassgoggledcoders.iberiarediscovered.api.capability.WorldPos;
 import xyz.brassgoggledcoders.iberiarediscovered.module.Module;
 import xyz.brassgoggledcoders.iberiarediscovered.module.Modules;
 
@@ -14,11 +17,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
+    private final Map<String, PlayerChoice> playerChoice;
+    private final Map<String, Difficulty> chosenDifficulty;
     private double ageProgress;
     private int age;
     private int maxHealthRegenPercent;
-    private Map<String, PlayerChoice> playerChoice = Maps.newHashMap();
-    private final Map<String, Difficulty> chosenDifficulty = Maps.newHashMap();
+    private GlobalPos lastRebirth;
+    private GlobalPos lastDeath;
+
+    public PlayerInfo() {
+        this.playerChoice = Maps.newHashMap();
+        this.chosenDifficulty = Maps.newHashMap();
+    }
 
     @Override
     public void setAgeProgress(int ageProgress) {
@@ -94,23 +104,24 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     }
 
     @Override
-    public void setOriginRebirth(WorldPos worldPos) {
-
+    public void setLastRebirth(GlobalPos worldPos) {
+        IberiaRediscovered.LOGGER.info("Set Last Rebirth to {}", worldPos);
+        this.lastRebirth = worldPos;
     }
 
     @Override
-    public WorldPos getOriginRebirth() {
-        return null;
+    public GlobalPos getLastRebirth() {
+        return this.lastRebirth;
     }
 
     @Override
-    public void setLastRebirth(WorldPos worldPos) {
-
+    public void setLastDeath(GlobalPos globalPos) {
+        this.lastDeath = globalPos;
     }
 
     @Override
-    public WorldPos getLastRebirth() {
-        return null;
+    public GlobalPos getLastDeath() {
+        return this.lastDeath;
     }
 
     @Override
@@ -123,6 +134,16 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
             playerChoiceNBT.putString(playerChoiceEntry.getKey(), playerChoiceEntry.getValue().toString());
         }
         nbt.put("playerChoice", playerChoiceNBT);
+        if (this.lastRebirth != null) {
+            GlobalPos.CODEC.encode(this.lastRebirth, NBTDynamicOps.INSTANCE, NBTDynamicOps.INSTANCE.empty())
+                    .result()
+                    .ifPresent(value -> nbt.put("lastRebirth", value));
+        }
+        if (this.lastDeath != null) {
+            GlobalPos.CODEC.encode(this.lastDeath, NBTDynamicOps.INSTANCE, NBTDynamicOps.INSTANCE.empty())
+                    .result()
+                    .ifPresent(value -> nbt.put("lastDeath", value));
+        }
         return nbt;
     }
 
@@ -133,6 +154,18 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
         CompoundNBT playerChoiceNBT = nbt.getCompound("playerChoice");
         for (String key : playerChoiceNBT.keySet()) {
             this.playerChoice.put(key, PlayerChoice.valueOf(playerChoiceNBT.getString(key)));
+        }
+        if (nbt.contains("lastRebirth")) {
+            GlobalPos.CODEC.decode(NBTDynamicOps.INSTANCE, nbt.getCompound("lastRebirth"))
+                    .result()
+                    .map(Pair::getFirst)
+                    .ifPresent(this::setLastRebirth);
+        }
+        if (nbt.contains("lastDeath")) {
+            GlobalPos.CODEC.decode(NBTDynamicOps.INSTANCE, nbt.getCompound("lastDeath"))
+                    .result()
+                    .map(Pair::getFirst)
+                    .ifPresent(this::setLastDeath);
         }
         this.recalculateMaxHealthRegenPercent();
     }
