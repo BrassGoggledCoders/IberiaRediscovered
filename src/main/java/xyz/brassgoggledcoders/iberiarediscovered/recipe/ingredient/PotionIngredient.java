@@ -2,12 +2,13 @@ package xyz.brassgoggledcoders.iberiarediscovered.recipe.ingredient;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.registries.ForgeRegistries;
 import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
 
 import javax.annotation.Nonnull;
@@ -21,14 +22,14 @@ public class PotionIngredient extends Ingredient {
     private final Potion potion;
 
     protected PotionIngredient(Potion potion) {
-        super(Stream.of(new SingleItemList(createPotion(potion))));
+        super(Stream.of(new ItemValue(createPotion(potion))));
         this.potion = potion;
     }
 
     @Override
     public boolean test(@Nullable ItemStack itemStack) {
         if (itemStack != null && !itemStack.isEmpty()) {
-            Potion testPotion = PotionUtils.getPotionFromItem(itemStack);
+            Potion testPotion = PotionUtils.getPotion(itemStack);
             return testPotion == potion;
         }
         return false;
@@ -38,7 +39,7 @@ public class PotionIngredient extends Ingredient {
     public JsonElement serialize() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("type", NAME.toString());
-        jsonObject.addProperty("potion", Objects.requireNonNull(this.getPotion().getRegistryName()).toString());
+        jsonObject.addProperty("potion", Objects.requireNonNull(ForgeRegistries.POTIONS.getKey(potion)).toString());
         return jsonObject;
     }
 
@@ -52,7 +53,7 @@ public class PotionIngredient extends Ingredient {
 
     private static ItemStack createPotion(Potion potion) {
         ItemStack itemStack = new ItemStack(Items.POTION);
-        PotionUtils.addPotionToItemStack(itemStack, potion);
+        PotionUtils.setPotion(itemStack, potion);
         return itemStack;
     }
 }

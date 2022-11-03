@@ -2,10 +2,10 @@ package xyz.brassgoggledcoders.iberiarediscovered.recipe.ingredient;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -16,15 +16,15 @@ import java.util.Objects;
 public class PotionIngredientSerializer implements IIngredientSerializer<PotionIngredient> {
     @Override
     @Nonnull
-    public PotionIngredient parse(PacketBuffer buffer) {
-        return PotionIngredient.of(ForgeRegistries.POTION_TYPES.getValue(buffer.readResourceLocation()));
+    public PotionIngredient parse(FriendlyByteBuf buffer) {
+        return PotionIngredient.of(ForgeRegistries.POTIONS.getValue(buffer.readResourceLocation()));
     }
 
     @Override
     @Nonnull
     public PotionIngredient parse(@Nonnull JsonObject json) {
-        String potionName = JSONUtils.getString(json, "potion");
-        Potion potion = ForgeRegistries.POTION_TYPES.getValue(new ResourceLocation(potionName));
+        String potionName = GsonHelper.getAsString(json, "potion");
+        Potion potion = ForgeRegistries.POTIONS.getValue(new ResourceLocation(potionName));
         if (potion != null) {
             return PotionIngredient.of(potion);
         } else {
@@ -34,7 +34,7 @@ public class PotionIngredientSerializer implements IIngredientSerializer<PotionI
 
     @Override
     @ParametersAreNonnullByDefault
-    public void write(PacketBuffer buffer, PotionIngredient ingredient) {
-        buffer.writeResourceLocation(Objects.requireNonNull(ingredient.getPotion().getRegistryName()));
+    public void write(FriendlyByteBuf buffer, PotionIngredient ingredient) {
+        buffer.writeResourceLocation(Objects.requireNonNull(ForgeRegistries.POTIONS.getKey(ingredient.getPotion())));
     }
 }

@@ -1,14 +1,14 @@
 package xyz.brassgoggledcoders.iberiarediscovered.event;
 
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
-import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfoProvider;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
+import xyz.brassgoggledcoders.iberiarediscovered.capability.PlayerInfoProvider;
 
 @Mod.EventBusSubscriber(modid = IberiaRediscovered.ID, bus = Bus.FORGE)
 public class ForgeEventHandler {
@@ -16,7 +16,7 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> entityAttachCapabilitiesEvent) {
-        if (entityAttachCapabilitiesEvent.getObject() instanceof PlayerEntity) {
+        if (entityAttachCapabilitiesEvent.getObject() instanceof Player) {
             PlayerInfoProvider playerInfoProvider = new PlayerInfoProvider();
             entityAttachCapabilitiesEvent.addCapability(PLAYER_INFO, playerInfoProvider);
             entityAttachCapabilitiesEvent.addListener(playerInfoProvider::invalidate);

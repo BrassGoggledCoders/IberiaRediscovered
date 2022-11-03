@@ -1,7 +1,7 @@
 package xyz.brassgoggledcoders.iberiarediscovered.capability;
 
 import com.google.common.collect.Maps;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Difficulty;
 import net.minecraftforge.common.util.INBTSerializable;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
@@ -12,11 +12,11 @@ import xyz.brassgoggledcoders.iberiarediscovered.module.Modules;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
+public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundTag> {
     private double ageProgress;
     private int age;
     private int maxHealthRegenPercent;
-    private Map<String, PlayerChoice> playerChoice = Maps.newHashMap();
+    private final Map<String, PlayerChoice> playerChoice = Maps.newHashMap();
     private final Map<String, Difficulty> chosenDifficulty = Maps.newHashMap();
 
     @Override
@@ -93,11 +93,11 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT nbt = new CompoundNBT();
+    public CompoundTag serializeNBT() {
+        CompoundTag nbt = new CompoundTag();
         nbt.putInt("age", this.age);
         nbt.putDouble("ageProgress", this.ageProgress);
-        CompoundNBT playerChoiceNBT = new CompoundNBT();
+        CompoundTag playerChoiceNBT = new CompoundTag();
         for (Entry<String, PlayerChoice> playerChoiceEntry : playerChoice.entrySet()) {
             playerChoiceNBT.putString(playerChoiceEntry.getKey(), playerChoiceEntry.getValue().toString());
         }
@@ -106,11 +106,11 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundNBT> {
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
+    public void deserializeNBT(CompoundTag nbt) {
         this.age = nbt.getInt("age");
         this.ageProgress = nbt.getDouble("ageProgress");
-        CompoundNBT playerChoiceNBT = nbt.getCompound("playerChoice");
-        for (String key : playerChoiceNBT.keySet()) {
+        CompoundTag playerChoiceNBT = nbt.getCompound("playerChoice");
+        for (String key : playerChoiceNBT.getAllKeys()) {
             this.playerChoice.put(key, PlayerChoice.valueOf(playerChoiceNBT.getString(key)));
         }
         this.recalculateMaxHealthRegenPercent();

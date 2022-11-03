@@ -1,8 +1,8 @@
 package xyz.brassgoggledcoders.iberiarediscovered.event;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -19,29 +19,24 @@ public class MedicalHealingEventHandler {
     @SubscribeEvent
     public void onDamageReceived(LivingDamageEvent event) {
         if (event.getAmount() >= 2) {
-            LivingEntity livingEntity = event.getEntityLiving();
-            if (livingEntity.getActivePotionEffect(RediscoveredEffects.TREATED.get()) != null) {
-                event.getEntityLiving().removePotionEffect(RediscoveredEffects.TREATED.get());
+            LivingEntity livingEntity = event.getEntity();
+            if (livingEntity.getEffect(RediscoveredEffects.TREATED.get()) != null) {
+                event.getEntity().removeEffect(RediscoveredEffects.TREATED.get());
             }
         }
     }
 
     @SubscribeEvent
     public void onAwake(PlayerWakeUpEvent event) {
-        PlayerEntity playerEntity = event.getPlayer();
-        final Difficulty worldDifficulty = event.getPlayer().getEntityWorld().getDifficulty();
+        Player playerEntity = event.getEntity();
+        final Difficulty worldDifficulty = event.getEntity().getLevel().getDifficulty();
         int healing = playerEntity.getCapability(RediscoveredCapabilities.PLAYER_INFO)
                 .filter(Modules.MEDICAL_HEALING_MODULE::isActiveFor)
                 .map(playerInfo -> playerInfo.getDifficultyFor(MedicalHealingModule.NAME, worldDifficulty))
-                .map(difficulty -> {
-                    switch (difficulty) {
-                        case HARD:
-                            return 3;
-                        case NORMAL:
-                            return 6;
-                        default:
-                            return 9;
-                    }
+                .map(difficulty -> switch (difficulty) {
+                    case HARD -> 3;
+                    case NORMAL -> 6;
+                    default -> 9;
                 })
                 .orElse(0);
 

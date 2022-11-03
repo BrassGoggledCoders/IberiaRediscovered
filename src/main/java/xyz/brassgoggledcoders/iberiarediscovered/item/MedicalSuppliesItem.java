@@ -1,15 +1,15 @@
 package xyz.brassgoggledcoders.iberiarediscovered.item;
 
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredEffects;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -24,8 +24,8 @@ public class MedicalSuppliesItem extends Item {
 
     @Override
     @Nonnull
-    public UseAction getUseAction(@Nonnull ItemStack itemStack) {
-        return UseAction.DRINK;
+    public UseAnim getUseAnimation(@Nonnull ItemStack itemStack) {
+        return UseAnim.DRINK;
     }
 
     @Override
@@ -36,20 +36,20 @@ public class MedicalSuppliesItem extends Item {
     @Override
     @Nonnull
     @ParametersAreNonnullByDefault
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (player.getHealth() < player.getMaxHealth()) {
-            player.setActiveHand(hand);
-            return ActionResult.resultConsume(player.getHeldItem(hand));
+            player.startUsingItem(hand);
+            return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
         } else {
-            return super.onItemRightClick(world, player, hand);
+            return super.use(level, player, hand);
         }
     }
 
     @Override
     @Nonnull
     @ParametersAreNonnullByDefault
-    public ItemStack onItemUseFinish(ItemStack itemStack, World world, LivingEntity entityLiving) {
-        entityLiving.addPotionEffect(new EffectInstance(
+    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entityLiving) {
+        entityLiving.addEffect(new MobEffectInstance(
                 RediscoveredEffects.TREATED.get(),
                 2 * 60 * 20,
                 2 * multiplier - 1

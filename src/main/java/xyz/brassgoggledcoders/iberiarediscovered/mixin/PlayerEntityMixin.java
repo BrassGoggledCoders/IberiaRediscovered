@@ -1,6 +1,6 @@
 package xyz.brassgoggledcoders.iberiarediscovered.mixin;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -8,16 +8,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredAttributes;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public class PlayerEntityMixin {
 
     @Inject(
-            method = "shouldHeal",
+            method = "",
             at = @At("HEAD"),
             cancellable = true
     )
     private void overrideShouldHeal(CallbackInfoReturnable<Boolean> callbackInfo) {
-        PlayerEntity playerEntity = ((PlayerEntity) (Object) this);
+        Player playerEntity = ((Player) (Object) this);
         if (playerEntity.getHealth() > 0 && playerEntity.getHealth() < playerEntity.getMaxHealth()) {
             int percent = playerEntity.getCapability(RediscoveredCapabilities.PLAYER_INFO)
                     .map(playerInfo -> playerInfo.getMaxHealthRegenPercent(

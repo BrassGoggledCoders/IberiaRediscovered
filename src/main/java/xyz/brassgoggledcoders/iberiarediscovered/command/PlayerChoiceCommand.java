@@ -5,10 +5,10 @@ import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.Commands;
-import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.entity.Entity;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.server.command.EnumArgument;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.PlayerChoice;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
@@ -24,7 +24,7 @@ public class PlayerChoiceCommand {
             RediscoveredTexts.NOT_PLAYER_CHOICE
     );
 
-    public static ArgumentBuilder<CommandSource, ?> create() {
+    public static ArgumentBuilder<CommandSourceStack, ?> create() {
         return Commands.literal("choices")
                 .then(Commands.argument("target", EntityArgument.player())
                         .then(choice(context -> {
@@ -45,7 +45,7 @@ public class PlayerChoiceCommand {
                 }));
     }
 
-    public static ArgumentBuilder<CommandSource, ?> choice(Function<CommandContext<CommandSource>, Collection<Entity>> targetFinding) {
+    public static ArgumentBuilder<CommandSourceStack, ?> choice(Function<CommandContext<CommandSourceStack>, Collection<Entity>> targetFinding) {
         return Commands.literal("choice")
                 .then(Commands.argument("choice", EnumArgument.enumArgument(PlayerChoice.class))
                         .then(Commands.argument("module", EnumArgument.enumArgument(Modules.class))
@@ -56,8 +56,8 @@ public class PlayerChoiceCommand {
                                         boolean justSelf = entities.stream()
                                                 .allMatch(entity -> entity == context.getSource().getEntity());
 
-                                        if (!justSelf && !context.getSource().hasPermissionLevel(2)) {
-                                            throw EntityArgument.SELECTOR_NOT_ALLOWED.create();
+                                        if (!justSelf && !context.getSource().hasPermission(2)) {
+                                            throw EntityArgument.ERROR_SELECTORS_NOT_ALLOWED.create();
                                         }
                                         if (justSelf) {
                                             if (!modules.get().isPlayerChoice()) {

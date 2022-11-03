@@ -1,6 +1,6 @@
 package xyz.brassgoggledcoders.iberiarediscovered.module;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.ForgeConfigSpec;
 import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredCapabilities;
@@ -32,7 +32,7 @@ public class Module {
         return playerChoice.get();
     }
 
-    public boolean isActiveFor(PlayerEntity playerEntity) {
+    public boolean isActiveFor(Player playerEntity) {
         return playerEntity.getCapability(RediscoveredCapabilities.PLAYER_INFO)
                 .map(this::isActiveFor)
                 .orElse(false);

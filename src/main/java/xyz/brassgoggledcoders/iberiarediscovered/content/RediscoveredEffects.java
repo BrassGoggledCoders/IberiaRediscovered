@@ -1,20 +1,21 @@
 package xyz.brassgoggledcoders.iberiarediscovered.content;
 
+import com.tterrag.registrate.util.entry.RegistryEntry;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffect;
 import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
 import xyz.brassgoggledcoders.iberiarediscovered.effect.TreatedEffect;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import net.minecraft.potion.Effect;
-import net.minecraft.util.text.TranslationTextComponent;
 
 @SuppressWarnings("unused")
 public class RediscoveredEffects {
 
-    public static final TranslationTextComponent TREATED_TEXT = IberiaRediscovered.getRegistrate()
+    public static final Component TREATED_TEXT = IberiaRediscovered.getRegistrate()
             .addLang("effect", IberiaRediscovered.rl("treated"), "Treated");
 
-    public static final RegistryEntry<Effect> TREATED = IberiaRediscovered.getRegistrate()
+    public static final RegistryEntry<MobEffect> TREATED = IberiaRediscovered.getRegistrate()
             .object("treated")
-            .simple(Effect.class, TreatedEffect::new);
+            .simple(Registry.MOB_EFFECT_REGISTRY, TreatedEffect::new);
 
     public static void setup() {
 
