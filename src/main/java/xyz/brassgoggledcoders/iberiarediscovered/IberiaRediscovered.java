@@ -47,7 +47,7 @@ public class IberiaRediscovered {
         RediscoveredAttributes.setup(modBus);
         RediscoveredItems.setup();
         RediscoveredEffects.setup();
-        RediscoveredLoot.setup();
+        RediscoveredLoot.setup(modBus);
         RediscoveredRecipes.setup();
         RediscoveredTexts.setup();
     }

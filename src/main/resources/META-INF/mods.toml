@@ -1,19 +1,19 @@
 modLoader="javafml"
-loaderVersion="[${loader_version},)"
+loaderVersion="[43,)"
 issueTrackerURL="https://github.com/Brass-Goggled-Coders/IberiaRediscovered/issues"
 license="MIT"
 
 [[mods]]
     modId="iberia_rediscovered"
-    version="${version}"
+    version="${file.jarVersion}"
     displayName="Iberia:Rediscovered"
-    authors="SkySom"
+    authors="DivineAspect, SkySom"
     description='''
     '''
 
 [[dependencies.iberia_rediscovered]]
     modId="forge"
     mandatory=true
-    versionRange="[${forge_version},)"
+    versionRange="[43.1.0,)"
     ordering="NONE"
     side="BOTH"

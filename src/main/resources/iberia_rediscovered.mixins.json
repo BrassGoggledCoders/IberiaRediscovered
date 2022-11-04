@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "iberia_rediscovered.refmap.json",
   "mixins": [
-    "PlayerEntityMixin"
+    "FoodDataMixin"
   ],
   "client": [
 
