@@ -1,4 +1,12 @@
 {
+  "block.iberia_rediscovered.hard_andesite": "Hard %s",
+  "block.iberia_rediscovered.hard_basalt": "Hard %s",
+  "block.iberia_rediscovered.hard_blackstone": "Hard %s",
+  "block.iberia_rediscovered.hard_deepslate": "Hard %s",
+  "block.iberia_rediscovered.hard_diorite": "Hard %s",
+  "block.iberia_rediscovered.hard_granite": "Hard %s",
+  "block.iberia_rediscovered.hard_netherrack": "Hard %s",
+  "block.iberia_rediscovered.hard_stone": "Hard %s",
   "command.iberia_rediscovered.not_player_choice": "This Module does not allow Players to Choose",
   "effect.iberia_rediscovered.treated": "Treated",
   "item.iberia_rediscovered.adequate_medical_supplies": "Adequate Medical Supplies",

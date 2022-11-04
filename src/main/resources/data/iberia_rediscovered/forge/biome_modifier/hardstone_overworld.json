@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "iberia_rediscovered:hardstone_overworld",
-  "step": "underground_decoration"
-}
