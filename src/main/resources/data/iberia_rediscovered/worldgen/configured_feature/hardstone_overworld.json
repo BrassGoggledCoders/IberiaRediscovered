@@ -1,0 +1,15 @@
+{
+  "type": "iberia_rediscovered:hard_stone",
+  "config": {
+    "replacements": [
+      {
+        "original": {
+          "Name": "minecraft:stone"
+        },
+        "replacement": {
+          "Name": "minecraft:cobblestone"
+        }
+      }
+    ]
+  }
+}
