@@ -1,0 +1,4 @@
+// 1.19.2	2022-11-04T00:13:32.2302569	Global Loot Modifiers : iberia_rediscovered
+9bbbbf4756cd030ab1706d8be52ee4acaf9069f9 data/forge/loot_modifiers/global_loot_modifiers.json
+f7caaf7b238cd739b21c02dc8e68aca4fef234ad data/iberia_rediscovered/loot_modifiers/elixir_of_youth_chest.json
+001bd5367d35ccb47a7f9edba07bce21d16fc335 data/iberia_rediscovered/loot_modifiers/elixir_of_youth_entity.json

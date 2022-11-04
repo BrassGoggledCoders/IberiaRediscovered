@@ -36,7 +36,8 @@ public class PotionIngredient extends Ingredient {
     }
 
     @Nonnull
-    public JsonElement serialize() {
+    @Override
+    public JsonElement toJson() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("type", NAME.toString());
         jsonObject.addProperty("potion", Objects.requireNonNull(ForgeRegistries.POTIONS.getKey(potion)).toString());

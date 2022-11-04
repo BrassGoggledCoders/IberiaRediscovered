@@ -1,4 +1,5 @@
 {
+  "type": "iberia_rediscovered:add_itemstacks",
   "conditions": [
     {
       "condition": "minecraft:alternative",
@@ -15,20 +16,19 @@
     },
     {
       "condition": "iberia_rediscovered:age",
-      "minAge": 10,
-      "entity": "killer_player"
+      "entity": "killer_player",
+      "minAge": 10
     },
     {
-      "condition": "minecraft:random_chance_with_looting",
       "chance": 0.005,
+      "condition": "minecraft:random_chance_with_looting",
       "looting_multiplier": 0.1
     }
   ],
-  "entries": [
+  "itemStacks": [
     {
-      "type": "minecraft:item",
-      "name": "iberia_rediscovered:elixir_of_youth"
+      "Count": 1,
+      "id": "iberia_rediscovered:elixir_of_youth"
     }
-  ],
-  "type": "iberia_rediscovered:loot_entry"
+  ]
 }
