@@ -76,7 +76,7 @@ public class RediscoveredBlocks {
                 .block(properties -> blockConstructor.apply(properties, location, block))
                 .lang("Hard %s")
                 .initialProperties(block)
-                .tag(location.blockKey())
+                .tag(location.blockKey(), RediscoveredBlockTags.HARD)
                 .loot((lootTables, hardBlock) -> lootTables.dropOther(hardBlock, block.get()));
     }
 

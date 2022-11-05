@@ -1,4 +1,4 @@
-// 1.19.2	2022-11-04T16:53:57.8922631	Registrate Provider for iberia_rediscovered [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-11-04T22:54:49.188141	Registrate Provider for iberia_rediscovered [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b1e1c375292bc330e5f0d6771339400464898f1a assets/iberia_rediscovered/blockstates/hard_andesite.json
 15c2eeed604e6f9c67f724e35c8ca2e1d1cd574c assets/iberia_rediscovered/blockstates/hard_basalt.json
 b0e71241483bc721b9652ec59ee2797bd55bc607 assets/iberia_rediscovered/blockstates/hard_blackstone.json
@@ -30,6 +30,8 @@ d67e6f47862ca5ce98b50b9dbf11434c77dff5aa data/iberia_rediscovered/recipes/adequa
 88200da5170d1a94c006ed8b87348efadb67cc41 data/iberia_rediscovered/recipes/basic_medical_supplies.json
 57a74bbbf7a1fa4c938e08e0b606294c23cc985f data/iberia_rediscovered/recipes/primitive_medical_supplies.json
 65cb14c5fe30e4bd19ae0bcae7025047f46825e1 data/iberia_rediscovered/recipes/supernatural_medical_supplies.json
+d985e3325128114a29cad5f0748a70f416e8b55d data/iberia_rediscovered/tags/blocks/compressing.json
+f537efe242becd9c930bf5139ed48a43e66f8b35 data/iberia_rediscovered/tags/blocks/hard.json
 35ee53cad6d50cd45435c51e5135ac873bc3ea5a data/minecraft/tags/blocks/base_stone_nether.json
 5dd12904a43346f5644c3b8b7d2b6a1c2cbac89b data/minecraft/tags/blocks/base_stone_overworld.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/blocks/moss_replaceable.json

@@ -1,47 +1,44 @@
 package xyz.brassgoggledcoders.iberiarediscovered.block;
 
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.NotNull;
-import xyz.brassgoggledcoders.iberiarediscovered.content.RediscoveredBlockProperties;
 import xyz.brassgoggledcoders.iberiarediscovered.feature.HardStoneLocation;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
-public class HardRotatedPillarBlock extends RotatedPillarBlock implements IHardBlock {
-    public static final BooleanProperty ACTIVE = RediscoveredBlockProperties.ACTIVE;
-
-    private final HardStoneLocation location;
-    private final Supplier<Block> baseVersion;
+public class HardRotatedPillarBlock extends HardBlock {
+    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
     public HardRotatedPillarBlock(Properties pProperties, HardStoneLocation location, Supplier<Block> baseVersion) {
-        super(pProperties);
-        this.registerDefaultState(this.defaultBlockState().setValue(ACTIVE, true));
-        this.location = location;
-        this.baseVersion = baseVersion;
+        super(pProperties, location, baseVersion);
+        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
+    }
+
+    @Override
+    @NotNull
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public BlockState rotate(BlockState pState, Rotation pRot) {
+        return RotatedPillarBlock.rotatePillar(pState, pRot);
     }
 
     @Override
     protected void createBlockStateDefinition(@NotNull StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(ACTIVE);
+        pBuilder.add(AXIS);
     }
 
-    @Override
-    public Block getBaseBlock() {
-        return this.baseVersion.get();
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        return this.defaultBlockState().setValue(AXIS, pContext.getClickedFace().getAxis());
     }
 
-    @Override
-    public Block getSelf() {
-        return this;
-    }
-
-    @Override
-    public HardStoneLocation getLocation() {
-        return this.location;
-    }
 }

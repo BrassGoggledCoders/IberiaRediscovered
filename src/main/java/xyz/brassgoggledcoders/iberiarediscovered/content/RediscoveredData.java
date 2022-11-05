@@ -5,6 +5,8 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
 import xyz.brassgoggledcoders.iberiarediscovered.block.IHardBlock;
@@ -17,5 +19,12 @@ public class RediscoveredData {
             block.filter(IHardBlock.class::isInstance)
                     .ifPresent(mossReplaceableAppender::remove);
         }
+
+        tagsProvider.tag(RediscoveredBlockTags.COMPRESSING)
+                .addTag(RediscoveredBlockTags.HARD)
+                .addTag(Tags.Blocks.STONE)
+                .addTag(Tags.Blocks.ORES)
+                .addTag(BlockTags.DIRT)
+                .add(Blocks.BEDROCK);
     }
 }

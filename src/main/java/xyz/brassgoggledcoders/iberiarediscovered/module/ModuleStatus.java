@@ -8,7 +8,7 @@ public enum ModuleStatus {
     ENABLED(playerChoice -> true),
     OPT_OUT(PlayerChoice::isOptOut),
     OPT_IN(PlayerChoice::isOptIn),
-    DISABLED(playerInfo -> false);
+    DISABLED(playerChoice -> false);
 
     private final Predicate<PlayerChoice> isEnabled;
 
