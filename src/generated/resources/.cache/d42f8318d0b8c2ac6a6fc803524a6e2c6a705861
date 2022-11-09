@@ -1,4 +1,4 @@
-// 1.19.2	2022-11-08T21:24:51.578543	Registrate Provider for iberia_rediscovered [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-11-08T22:17:06.8966456	Registrate Provider for iberia_rediscovered [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b1e1c375292bc330e5f0d6771339400464898f1a assets/iberia_rediscovered/blockstates/hard_andesite.json
 15c2eeed604e6f9c67f724e35c8ca2e1d1cd574c assets/iberia_rediscovered/blockstates/hard_basalt.json
 b0e71241483bc721b9652ec59ee2797bd55bc607 assets/iberia_rediscovered/blockstates/hard_blackstone.json
@@ -36,3 +36,5 @@ d985e3325128114a29cad5f0748a70f416e8b55d data/iberia_rediscovered/tags/blocks/co
 016f5e9cac5d3f54f1515e0066906bfded22fb4e data/iberia_rediscovered/tags/blocks/hard.json
 35ee53cad6d50cd45435c51e5135ac873bc3ea5a data/minecraft/tags/blocks/base_stone_nether.json
 e6fd1875fdda4c3cfa3ddaf3b67303626c90e8fe data/minecraft/tags/blocks/base_stone_overworld.json
+016f5e9cac5d3f54f1515e0066906bfded22fb4e data/minecraft/tags/blocks/mineable/pickaxe.json
+016f5e9cac5d3f54f1515e0066906bfded22fb4e data/minecraft/tags/blocks/needs_stone_tool.json

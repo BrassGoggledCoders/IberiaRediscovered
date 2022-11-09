@@ -7,6 +7,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -80,7 +81,7 @@ public class RediscoveredBlocks {
                 .block(properties -> blockConstructor.apply(properties, location, block))
                 .lang("Hard %s")
                 .initialProperties(block)
-                .tag(location.blockKey(), RediscoveredBlockTags.HARD)
+                .tag(location.blockKey(), RediscoveredBlockTags.HARD, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL)
                 .loot((lootTables, hardBlock) -> lootTables.dropOther(hardBlock, block.get()));
     }
 
