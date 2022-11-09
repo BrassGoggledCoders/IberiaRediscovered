@@ -1,6 +1,7 @@
 package xyz.brassgoggledcoders.iberiarediscovered;
 
 import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +19,7 @@ import xyz.brassgoggledcoders.iberiarediscovered.api.capability.IPlayerInfo;
 import xyz.brassgoggledcoders.iberiarediscovered.config.ServerConfig;
 import xyz.brassgoggledcoders.iberiarediscovered.content.*;
 import xyz.brassgoggledcoders.iberiarediscovered.data.RediscoveredGLMProvider;
+import xyz.brassgoggledcoders.iberiarediscovered.feature.FeatureDataGeneration;
 
 import javax.annotation.Nonnull;
 
@@ -33,6 +35,7 @@ public class IberiaRediscovered {
                     return RediscoveredItems.ELIXIR_OF_YOUTH.asStack();
                 }
             }, "Iberia Rediscovered")
+            .addDataGenerator(ProviderType.BLOCK_TAGS, RediscoveredData::blockTags)
     );
 
     public IberiaRediscovered() {
@@ -45,8 +48,10 @@ public class IberiaRediscovered {
         MinecraftForge.EVENT_BUS.addListener(this::commandSetup);
 
         RediscoveredAttributes.setup(modBus);
+        RediscoveredBlocks.setup();
         RediscoveredItems.setup();
         RediscoveredEffects.setup();
+        RediscoveredFeatures.setup();
         RediscoveredLoot.setup(modBus);
         RediscoveredRecipes.setup();
         RediscoveredTexts.setup();
@@ -58,6 +63,7 @@ public class IberiaRediscovered {
 
     public void onData(GatherDataEvent event) {
         event.getGenerator().addProvider(event.includeServer(), new RediscoveredGLMProvider(event.getGenerator(), ID));
+        FeatureDataGeneration.createProviders(event);
     }
 
     public void commandSetup(RegisterCommandsEvent event) {

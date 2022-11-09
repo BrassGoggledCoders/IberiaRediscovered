@@ -1,0 +1,39 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": {
+    "feature": {
+      "type": "iberia_rediscovered:hard_stone",
+      "config": {
+        "replacements": [
+          {
+            "original": "minecraft:deepslate",
+            "replacement": "iberia_rediscovered:hard_deepslate"
+          },
+          {
+            "original": "minecraft:stone",
+            "replacement": "iberia_rediscovered:hard_stone"
+          },
+          {
+            "original": "minecraft:granite",
+            "replacement": "iberia_rediscovered:hard_granite"
+          },
+          {
+            "original": "minecraft:diorite",
+            "replacement": "iberia_rediscovered:hard_diorite"
+          },
+          {
+            "original": "minecraft:tuff",
+            "replacement": "iberia_rediscovered:hard_tuff"
+          },
+          {
+            "original": "minecraft:andesite",
+            "replacement": "iberia_rediscovered:hard_andesite"
+          }
+        ]
+      }
+    },
+    "placement": []
+  },
+  "step": "underground_decoration"
+}

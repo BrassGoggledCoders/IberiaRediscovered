@@ -1,0 +1,27 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": {
+    "feature": {
+      "type": "iberia_rediscovered:hard_stone",
+      "config": {
+        "replacements": [
+          {
+            "original": "minecraft:blackstone",
+            "replacement": "iberia_rediscovered:hard_blackstone"
+          },
+          {
+            "original": "minecraft:basalt",
+            "replacement": "iberia_rediscovered:hard_basalt"
+          },
+          {
+            "original": "minecraft:netherrack",
+            "replacement": "iberia_rediscovered:hard_netherrack"
+          }
+        ]
+      }
+    },
+    "placement": []
+  },
+  "step": "underground_decoration"
+}
