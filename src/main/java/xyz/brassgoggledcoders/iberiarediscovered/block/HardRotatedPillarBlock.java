@@ -37,6 +37,7 @@ public class HardRotatedPillarBlock extends HardBlock {
         pBuilder.add(AXIS);
     }
 
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState().setValue(AXIS, pContext.getClickedFace().getAxis());
     }

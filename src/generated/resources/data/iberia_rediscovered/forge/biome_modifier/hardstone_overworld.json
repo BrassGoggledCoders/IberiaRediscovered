@@ -7,6 +7,10 @@
       "config": {
         "replacements": [
           {
+            "original": "minecraft:tuff",
+            "replacement": "iberia_rediscovered:hard_tuff"
+          },
+          {
             "original": "minecraft:stone",
             "replacement": "iberia_rediscovered:hard_stone"
           },

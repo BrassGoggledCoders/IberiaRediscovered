@@ -5,6 +5,7 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -29,6 +30,7 @@ public class RediscoveredBlocks {
     public static final BlockEntry<HardBlock> HARD_DIORITE = createHardBlockFor("diorite", HardStoneLocation.OVERWORLD, () -> Blocks.DIORITE);
     public static final BlockEntry<HardBlock> HARD_ANDESITE = createHardBlockFor("andesite", HardStoneLocation.OVERWORLD, () -> Blocks.ANDESITE);
     public static final BlockEntry<HardBlock> HARD_GRANITE = createHardBlockFor("granite", HardStoneLocation.OVERWORLD, () -> Blocks.GRANITE);
+    public static final BlockEntry<HardBlock> HARD_TUFF = createHardBlockFor("tuff", HardStoneLocation.OVERWORLD, () -> Blocks.TUFF);
     //Nether
     public static final BlockEntry<HardBlock> HARD_NETHERRACK = createHardBlockFor("netherrack", HardStoneLocation.NETHER, () -> Blocks.NETHERRACK);
     public static final BlockEntry<HardRotatedPillarBlock> HARD_BASALT = createHardBlockFor("basalt", HardStoneLocation.NETHER, () -> Blocks.BASALT, HardRotatedPillarBlock::new)
@@ -40,11 +42,13 @@ public class RediscoveredBlocks {
                                 "block/" + blockName.getPath()
                         ));
 
-                provider.axisBlock(
-                        context.get(),
-                        existing,
-                        existing
-                );
+                provider.getVariantBuilder(context.get())
+                        .partialState().with(HardRotatedPillarBlock.AXIS, Direction.Axis.Y)
+                        .modelForState().modelFile(existing).addModel()
+                        .partialState().with(HardRotatedPillarBlock.AXIS, Direction.Axis.Z)
+                        .modelForState().modelFile(existing).rotationX(90).addModel()
+                        .partialState().with(HardRotatedPillarBlock.AXIS, Direction.Axis.X)
+                        .modelForState().modelFile(existing).rotationX(90).rotationY(90).addModel();
             })
             .register();
     public static final BlockEntry<HardBlock> HARD_BLACKSTONE = createHardBlockFor("blackstone", HardStoneLocation.NETHER, () -> Blocks.BLACKSTONE);
