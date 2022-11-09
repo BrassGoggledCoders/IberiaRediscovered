@@ -11,12 +11,12 @@
             "replacement": "iberia_rediscovered:hard_blackstone"
           },
           {
-            "original": "minecraft:netherrack",
-            "replacement": "iberia_rediscovered:hard_netherrack"
-          },
-          {
             "original": "minecraft:basalt",
             "replacement": "iberia_rediscovered:hard_basalt"
+          },
+          {
+            "original": "minecraft:netherrack",
+            "replacement": "iberia_rediscovered:hard_netherrack"
           }
         ]
       }

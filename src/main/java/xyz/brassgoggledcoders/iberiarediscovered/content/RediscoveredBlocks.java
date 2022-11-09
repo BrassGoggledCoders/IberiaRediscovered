@@ -51,6 +51,12 @@ public class RediscoveredBlocks {
                         .partialState().with(HardRotatedPillarBlock.AXIS, Direction.Axis.X)
                         .modelForState().modelFile(existing).rotationX(90).rotationY(90).addModel();
             })
+            .item()
+            .model((context, provider) -> provider.withExistingParent(
+                    provider.name(context),
+                    new ResourceLocation(provider.modid(() -> Blocks.BASALT), "block/" + provider.name(() -> Blocks.BASALT))
+            ))
+            .build()
             .register();
     public static final BlockEntry<HardBlock> HARD_BLACKSTONE = createHardBlockFor("blackstone", HardStoneLocation.NETHER, () -> Blocks.BLACKSTONE);
 
@@ -67,6 +73,7 @@ public class RediscoveredBlocks {
                                     ))
                     );
                 })
+                .simpleItem()
                 .register();
     }
 
@@ -79,7 +86,6 @@ public class RediscoveredBlocks {
         return IberiaRediscovered.getRegistrate()
                 .object("hard_%s".formatted(name))
                 .block(properties -> blockConstructor.apply(properties, location, block))
-                .lang("Hard %s")
                 .initialProperties(block)
                 .tag(location.blockKey(), RediscoveredBlockTags.HARD, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL)
                 .loot((lootTables, hardBlock) -> lootTables.dropOther(hardBlock, block.get()));

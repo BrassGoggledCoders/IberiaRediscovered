@@ -1,4 +1,4 @@
-// 1.19.2	2022-11-08T22:17:06.8966456	Registrate Provider for iberia_rediscovered [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-11-08T22:44:21.6860599	Registrate Provider for iberia_rediscovered [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b1e1c375292bc330e5f0d6771339400464898f1a assets/iberia_rediscovered/blockstates/hard_andesite.json
 15c2eeed604e6f9c67f724e35c8ca2e1d1cd574c assets/iberia_rediscovered/blockstates/hard_basalt.json
 b0e71241483bc721b9652ec59ee2797bd55bc607 assets/iberia_rediscovered/blockstates/hard_blackstone.json
@@ -8,11 +8,20 @@ ce97a9393b8bb513593f079bc7b263025995ae5d assets/iberia_rediscovered/blockstates/
 1abcff4243f5ec1c36628c3156eda8068a10a0c0 assets/iberia_rediscovered/blockstates/hard_netherrack.json
 3b3bd41654679d6316db5788c33b8bfae5bd9c02 assets/iberia_rediscovered/blockstates/hard_stone.json
 817ddfd7537ada8da8c98560882eade4ed79afec assets/iberia_rediscovered/blockstates/hard_tuff.json
-f8f7d891b4a4b3df8b941f108b096aef11a12f74 assets/iberia_rediscovered/lang/en_ud.json
-17ac28cd8e96a2cc29c94aeff2cb16315649f96f assets/iberia_rediscovered/lang/en_us.json
+71053040a78a359e40710baed2a50c0145c121c2 assets/iberia_rediscovered/lang/en_ud.json
+66e8d0b3706ca95cbc5ebf7d5cc7c7951fd4ca0a assets/iberia_rediscovered/lang/en_us.json
 485c14016cedd5875bc8d7897d5dd917bbb8e06d assets/iberia_rediscovered/models/item/adequate_medical_supplies.json
 fc39d5e473773f6c92346f5f89b128f5839b8981 assets/iberia_rediscovered/models/item/basic_medical_supplies.json
 7ea34fbae62a869775737d18346c60b8a3ef4135 assets/iberia_rediscovered/models/item/elixir_of_youth.json
+6764e2e3b5bb5c516a67c459bf635062a6e2f125 assets/iberia_rediscovered/models/item/hard_andesite.json
+e30b5934cdbc952d6e1f0c8972e691dd64dd1d98 assets/iberia_rediscovered/models/item/hard_basalt.json
+9e6d81454a65b99499c844e38db869799eb5d528 assets/iberia_rediscovered/models/item/hard_blackstone.json
+ae2e5a8e5f85d8f76e44d811bd2d25e2c916644c assets/iberia_rediscovered/models/item/hard_deepslate.json
+2b8f17b2111f765a81ad6e3bd04645397945e173 assets/iberia_rediscovered/models/item/hard_diorite.json
+7ef6d0ff66833448bd3a6088067aaefc647f944f assets/iberia_rediscovered/models/item/hard_granite.json
+307a24518b9b22d2285e2c1727c429d65a73eb53 assets/iberia_rediscovered/models/item/hard_netherrack.json
+fb63fdeef603a7edf02010fc963c89e2d41931b6 assets/iberia_rediscovered/models/item/hard_stone.json
+1f5d5a965ab0db7aa6ac3214eb403eac421af77c assets/iberia_rediscovered/models/item/hard_tuff.json
 33fc73a0bdedf7261f809a1c4295b74055433934 assets/iberia_rediscovered/models/item/primitive_medical_supplies.json
 43bbc9cc273436098573d3f91a8259c9641dbbcf assets/iberia_rediscovered/models/item/supernatural_medical_supplies.json
 b2550005fe9106d185b2f11b14c9d7a35045ebfa data/iberia_rediscovered/advancements/recipes/iberia_rediscovered/adequate_medical_supplies.json
