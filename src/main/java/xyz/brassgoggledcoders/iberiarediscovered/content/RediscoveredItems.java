@@ -3,11 +3,13 @@ package xyz.brassgoggledcoders.iberiarediscovered.content;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.Tags;
 import xyz.brassgoggledcoders.iberiarediscovered.IberiaRediscovered;
+import xyz.brassgoggledcoders.iberiarediscovered.item.ClearedBlockItem;
 import xyz.brassgoggledcoders.iberiarediscovered.item.ElixirOfYouthItem;
 import xyz.brassgoggledcoders.iberiarediscovered.item.MedicalSuppliesItem;
 import xyz.brassgoggledcoders.iberiarediscovered.recipe.ingredient.PotionIngredient;
@@ -68,6 +70,24 @@ public class RediscoveredItems {
     public static final ItemEntry<ElixirOfYouthItem> ELIXIR_OF_YOUTH = IberiaRediscovered.getRegistrate()
             .object("elixir_of_youth")
             .item(ElixirOfYouthItem::new)
+            .register();
+
+    public static final ItemEntry<ClearedBlockItem> CLEARED_DIRT = IberiaRediscovered.getRegistrate()
+            .object("cleared_dirt")
+            .item(properties -> new ClearedBlockItem(Items.DIRT, properties))
+            .model((context, provider) -> provider.withExistingParent(
+                    provider.name(context),
+                    new ResourceLocation(provider.modid(context.get()::getUnclearedBlock), "block/" + provider.name(context.get()::getUnclearedBlock)))
+            )
+            .register();
+
+    public static final ItemEntry<ClearedBlockItem> CLEARED_GRASS = IberiaRediscovered.getRegistrate()
+            .object("cleared_grass")
+            .item(properties -> new ClearedBlockItem(Items.GRASS, properties))
+            .model((context, provider) -> provider.withExistingParent(
+                    provider.name(context),
+                    new ResourceLocation(provider.modid(context.get()::getUnclearedBlock), "block/" + provider.name(context.get()::getUnclearedBlock)))
+            )
             .register();
 
     public static void setup() {

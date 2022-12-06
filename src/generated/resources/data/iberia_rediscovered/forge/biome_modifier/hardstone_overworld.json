@@ -7,28 +7,28 @@
       "config": {
         "replacements": [
           {
-            "original": "minecraft:deepslate",
-            "replacement": "iberia_rediscovered:hard_deepslate"
+            "original": "minecraft:tuff",
+            "replacement": "iberia_rediscovered:hard_tuff"
           },
           {
             "original": "minecraft:stone",
             "replacement": "iberia_rediscovered:hard_stone"
           },
           {
+            "original": "minecraft:deepslate",
+            "replacement": "iberia_rediscovered:hard_deepslate"
+          },
+          {
             "original": "minecraft:granite",
             "replacement": "iberia_rediscovered:hard_granite"
           },
           {
-            "original": "minecraft:diorite",
-            "replacement": "iberia_rediscovered:hard_diorite"
-          },
-          {
-            "original": "minecraft:tuff",
-            "replacement": "iberia_rediscovered:hard_tuff"
-          },
-          {
             "original": "minecraft:andesite",
             "replacement": "iberia_rediscovered:hard_andesite"
+          },
+          {
+            "original": "minecraft:diorite",
+            "replacement": "iberia_rediscovered:hard_diorite"
           }
         ]
       }

@@ -1,4 +1,4 @@
-package xyz.brassgoggledcoders.iberiarediscovered.loot.modifier;
+package xyz.brassgoggledcoders.iberiarediscovered.loot.modifier.add;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

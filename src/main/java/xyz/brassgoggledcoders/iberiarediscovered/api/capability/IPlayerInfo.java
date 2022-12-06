@@ -24,4 +24,6 @@ public interface IPlayerInfo {
     PlayerChoice getChoiceFor(String module);
 
     void setChoiceFor(String module, PlayerChoice playerChoice);
+
+    boolean isActive(String name);
 }

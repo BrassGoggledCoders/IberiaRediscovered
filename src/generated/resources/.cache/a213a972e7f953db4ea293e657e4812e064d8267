@@ -1,4 +1,6 @@
-// 1.19.2	2022-11-04T00:13:32.2302569	Global Loot Modifiers : iberia_rediscovered
-9bbbbf4756cd030ab1706d8be52ee4acaf9069f9 data/forge/loot_modifiers/global_loot_modifiers.json
+// 1.19.2	2022-12-05T21:51:53.5401293	Global Loot Modifiers : iberia_rediscovered
+f9e948dc4915d3e00f7de83ea98abdcc10a1bb08 data/forge/loot_modifiers/global_loot_modifiers.json
+141920cc65410dc6c88537d7b8c848c8a7f521da data/iberia_rediscovered/loot_modifiers/cleared_dirt.json
+49cb3c9621c7b36d65b30b75462a0a03c6c155d7 data/iberia_rediscovered/loot_modifiers/cleared_grass.json
 f7caaf7b238cd739b21c02dc8e68aca4fef234ad data/iberia_rediscovered/loot_modifiers/elixir_of_youth_chest.json
 001bd5367d35ccb47a7f9edba07bce21d16fc335 data/iberia_rediscovered/loot_modifiers/elixir_of_youth_entity.json

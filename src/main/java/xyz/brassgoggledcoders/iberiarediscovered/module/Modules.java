@@ -1,11 +1,14 @@
 package xyz.brassgoggledcoders.iberiarediscovered.module;
 
+import net.minecraftforge.fml.common.Mod;
+
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public enum Modules {
     MEDICAL_HEALING(Modules::getHealing),
-    HARD_STONE(Modules::getHardStone);
+    HARD_STONE(Modules::getHardStone),
+    ROUGH_EARTH(Modules::getRoughEarth);
 
     private final Supplier<Module> getModule;
 
@@ -22,6 +25,7 @@ public enum Modules {
         return switch (name) {
             case MedicalHealingModule.NAME -> MEDICAL_HEALING_MODULE;
             case HardStoneModule.NAME -> HARD_STONE_MODULE;
+            case RoughEarthModule.NAME -> ROUGH_EARTH_MODULE;
             default -> null;
         };
     }
@@ -34,6 +38,11 @@ public enum Modules {
         return HARD_STONE_MODULE;
     }
 
+    public static Module getRoughEarth() {
+        return ROUGH_EARTH_MODULE;
+    }
+
     public static final MedicalHealingModule MEDICAL_HEALING_MODULE = new MedicalHealingModule();
     public static final HardStoneModule HARD_STONE_MODULE = new HardStoneModule();
+    public static final RoughEarthModule ROUGH_EARTH_MODULE = new RoughEarthModule();
 }

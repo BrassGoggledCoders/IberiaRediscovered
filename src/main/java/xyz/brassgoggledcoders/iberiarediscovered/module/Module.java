@@ -42,6 +42,10 @@ public class Module {
         return this.getStatus().isEnabled(playerInfo.getChoiceFor(this.getName()));
     }
 
+    public boolean isActive() {
+        return this.getStatus().isEnabled(null);
+    }
+
     public void configureServer(ForgeConfigSpec.Builder builder) {
         this.status = builder.defineEnum("status", ModuleStatus.ENABLED);
         this.difficulty = builder.defineEnum("difficulty", ModuleDifficulty.WORLD);

@@ -1,4 +1,4 @@
-package xyz.brassgoggledcoders.iberiarediscovered.loot.modifier;
+package xyz.brassgoggledcoders.iberiarediscovered.loot.modifier.add;
 
 import com.google.common.collect.Lists;
 import net.minecraft.world.item.ItemStack;

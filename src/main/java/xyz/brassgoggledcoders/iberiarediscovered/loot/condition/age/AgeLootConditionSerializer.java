@@ -1,10 +1,9 @@
-package xyz.brassgoggledcoders.iberiarediscovered.loot.condition;
+package xyz.brassgoggledcoders.iberiarediscovered.loot.condition.age;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootContext.EntityTarget;
 import net.minecraft.world.level.storage.loot.Serializer;
 

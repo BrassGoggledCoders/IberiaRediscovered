@@ -1,4 +1,4 @@
-package xyz.brassgoggledcoders.iberiarediscovered.loot.condition;
+package xyz.brassgoggledcoders.iberiarediscovered.loot.condition.age;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.loot.LootContext;

@@ -93,6 +93,11 @@ public class PlayerInfo implements IPlayerInfo, INBTSerializable<CompoundTag> {
     }
 
     @Override
+    public boolean isActive(String name) {
+        return Modules.get(name).isActiveFor(this);
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("age", this.age);
